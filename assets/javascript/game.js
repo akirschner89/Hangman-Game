@@ -1,71 +1,86 @@
 
 
 
-// // var GRATEFULDEAD = ["G", "R", "A", "T", "E", "F", "U", "L", "D", "E", "A", "D", doument.documentQuery(".bandimage").innerHTML = "<img src="assets/images/jerry_garcia.png" alt="GD">]";
-// var PHISH = ["P", "H", "I", "S", "H", doument.documentQuery(".bandimage").innerHTML = "<img src="assets/images/trey.png" alt="PHISH">]"];
-// var STRINGCHEESE = ["S", "T", "R", "I", "N","G", "C", "H", "E", "E", "S", "E", doument.documentQuery(".bandimage").innerHTML = "<img src="assets/images/cheese.png" alt="CHEESE">]"];
-// var GALACTIC = ["G", "A", "L", "A", "C", "T", "I", "C"];
-// var LETTUCE = ["L", "E", "T", "T", "U", "C", "E"];
-
-
-	var bands = ["GRATEFULDEAD", "PHISH", "STRINGCHEESE", "GALACTIC", "LETTUCE"]
+	// TODO: 
+	var images = {GRATEFULDEAD: 'assets/images/jerry_garcia.png', PHISH: 'assets/images/trey.jpeg', STRINGCHEESE: 'assets/images/cheese.jpeg', GALACTIC: 'assets/images/galactic.jpg', LETTUCE: 'assets/images/lettuce.jpeg'};
+	// to look up an image:
+	var bands = ["GRATEFULDEAD", "PHISH", "STRINGCHEESE", "GALACTIC", "LETTUCE"];
+	// var bands = ["GRATEFULDEAD", "PHISH", "STRINGCHEESE", "GALACTIC", "LETTUCE"]
 	var wins = 0;
 	var wrongCounter = 15;
 	var badLetters = []; 
+	var rightLetters = [];
 	var randomBand = bands[Math.floor(Math.random() * bands.length)];
 	var bandUnderScore = randomBand.split("").map(function(){return "_"});
 	document.getElementById("correctLetters").innerHTML = bandUnderScore.join(" ");
+	document.getElementById("band-pic").setAttribute('src', images[randomBand]);
 
 
 function reset() {
 	randomBand = bands[Math.floor(Math.random() * bands.length)];
 	bandUnderScore = randomBand.split("").map(function(){return "_"});
 	document.getElementById("correctLetters").innerHTML = bandUnderScore.join(" ");
-	// wins++;
-	console.log("adding to wins");
-	console.log(wins);
+	badLetters = [];
+	rightLetters = [];
+	wrongCounter = 15;
 	document.getElementById("winsCounter").innerHTML = wins;
+	document.getElementById("wrongLetters").innerHTML ="<h3>" + badLetters + "</h3>";
+	document.getElementById("wrongCounter").innerHTML = "<h3>" + wrongCounter + "</h3>";
+	document.getElementById("band-pic").setAttribute('src', images[randomBand]);
 };
-
-
-// reset();
-
 
 
 
 document.onkeyup = function (event) {
-	console.log(bandUnderScore);
+	console.log(rightLetters);
+// matching keycode numebrs
+	var keyGuess = event.keyCode;
 
-
-
-	var guess = String.fromCharCode(event.keyCode).toUpperCase();
+	var guess = String.fromCharCode(keyGuess).toUpperCase();
 	var index = randomBand.indexOf(guess);
-	// console.log(index);
+	
 
+	if(!((keyGuess >= 65 && keyGuess <= 90) || (keyGuess >= 97 && keyGuess <= 122))) {
+	    return // do nothing
+	}
 
-    while(index >= 0) {
-    bandUnderScore[index] = guess;
-    document.getElementById("correctLetters").innerHTML = "<h3>" + bandUnderScore.join(" ") + "</h3>";
-    index = randomBand.indexOf(guess,index + 1);
-    // badLetters.push(guess);
-    };
-    
-
-
-    if (index === -1) {
-    	wrongCounter--;
+	if ((badLetters.indexOf(guess) != -1) || (rightLetters.indexOf(guess) != -1)) {
+		console.log("returning because letter is in badletters or goodletters");
+		return // do nothing
+	} else if (index >= 0) {
+	    while(index >= 0) {
+		    bandUnderScore[index] = guess;
+		    document.getElementById("correctLetters").innerHTML = "<h3>" + bandUnderScore.join(" ") + "</h3>";
+		    index = randomBand.indexOf(guess,index + 1);
+		    rightLetters.push(guess);
+		    // badLetters.push(guess);
+    	}
+	} else {
+		wrongCounter--;
+    	console.log("losing life");
     	document.getElementById("wrongCounter").innerHTML = "<h3>" + wrongCounter + "</h3>";
     	// var badLetters = []; 
     	badLetters.push(guess);
 		document.getElementById("wrongLetters").innerHTML ="<h3>" + badLetters + "</h3>";
-    };
+
+	}
+
+
+  //   if (index === -1) {
+  //   	wrongCounter--;
+  //   	console.log("losing life");
+  //   	document.getElementById("wrongCounter").innerHTML = "<h3>" + wrongCounter + "</h3>";
+  //   	// var badLetters = []; 
+  //   	badLetters.push(guess);
+		// document.getElementById("wrongLetters").innerHTML ="<h3>" + badLetters + "</h3>";
+  //   };
 
 // if (index >= 0) {
 
 // }
             
 	if (bandUnderScore.indexOf("_") == -1) {
-					console.log("inside the bandUnderScore if block")
+					// console.log("inside the bandUnderScore if block")
 					wins ++;
 					// document.getElementById("wins").innerHTML = "<h3>" + "Wins = " + wins + "</h3>";
 					alert("You win! Play again!");
