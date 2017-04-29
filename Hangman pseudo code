@@ -1,0 +1,95 @@
+Hangman pseudo code
+
+HEADY HANGMAN
+
+
+- static image up top (float top? own container)
+- main container with one side (image only) and the other with 
+	1 Press any key to get started (static)
+	2 wins, starts at 0, increases whenever a guess is completed correctly
+	3 Curent word (static), _ replaced by a correctly guessed letter (onkeyup event combined with document.documentQuery or getElementByID - need to overwrite the underscore)
+	4 "Number of Guesses Remaining" - starts at 12 then counts down for any incorrect letter (if else statement? - maybe for both correct and incorrect guesses)
+	5 "Letters Already Guessed" - display the letters the user have guessed that are incorrect, display in-line? 
+
+
+	declare the first guess
+	use a function to capture user guesses, 
+	check against array of letters for that band name, 
+
+	add correct guesses to the _ under correct word, 
+		- how to determine number of _? -- maybe array.length = display x number of ?? Set within each band entry
+		- how to continue to add correct guesses into the HTML at their correct spot/index? replacing _ with a correct guess, in the right order -- stumped
+	add incorrect guesses under the letters already guessed section
+		- how to add the consecutive incorrect guesses into the bottom section? right now just 1 at a time shows up. How to display in alphabetical order -- stumped
+
+	how to limit number of guesses at 0 & move onto the next band when a user hits the 0 limit? the number of guesses just keeps going down with every incorrect guess...
+	
+	when a user "wins" - ie guesses all the correct letters, how move on to the next array & update image, _ placeholders, reset number of guesses counter & keep number of wins? 
+
+	USE OBJECT ARRAY TO DECLARE EACH BAND UP FRONT - then wins=0 trigger first valye, etc.
+
+
+
+
+	for potentialband2 function 
+
+       if (numberOfGuess=0) {
+
+  //       function(band2) {
+
+		// // define the first band for hangman as a variable
+		// var secondBand = ["P", "H", "I", "S", "H"];
+		// // var wrongGuesses = [];
+
+		// // test new var to replace correct guesses in the correct index in the html
+		// // var correctLetter = "<h3>" + ["_ " "_ " "_ " "_ " "_ " "_ " "_ " "_ " "_ " "_ " "_ " "_ "] + "</h3>";
+				
+        
+  //       var letter = String.fromCharCode(event.keyCode).toUpperCase();
+
+  //       // If the letter is in the var firstBand, run the following functions/methods.
+  //       if (firstBand.indexOf(letter) >= 0) {
+  //       		// find the index of firstBand that the guess is 
+  //       		// console.log(firstBand.indexOf(letter));
+
+  //       		// putting this here b/c it's so much closer
+  //       			document.querySelector("#correctLetters").innerHTML = letter
+
+
+  //       		// test with splice
+
+  //       		// console.log(correctLetter.splice ([firstBand.indexOf(letter)], 1, letter));
+
+
+  //       		// find that index in the correctLetter variable and replace the _ with the letter
+  //       		// function (replace) {
+  //       		// 	correctletter = [0][firstBand.indexOf(letter)];
+  //       		// };
+
+  //       		// take letter from the index number of first band and place it in the same index of correctLetter
+  //       		// console.log(correctletter = [firstBand.indexOf(letter)]);
+
+  //       		// document.querySelector("#correctLetters").innerHTML = correctLetter;
+
+  //       // return that letter in the id correctLetters in the html
+		//           // document.querySelector("#correctLetters").innerHTML = (correctletter = [firstBand.indexOf(letter)]);
+		//           // console.log(letter);
+  //       }
+
+  //       else {
+  //       // the guess counter decreases by 1 & add that letter to the incorrect guesses section
+  //       	numberOfGuess--;
+  //       	// wrongGuesses.push(letter);
+  //       	console.log("You Lose a " + letter);
+  //       	document.querySelector("#wrongLetters").innerHTML = letter;
+  //       // how to continue to add ALL of the wrong guesses, not just the most recent
+  //       	document.querySelector("#wrongCounter").innerHTML = numberOfGuess;
+
+  //       }
+
+  world = "hello" - an array
+
+how to select words at random? from a list?
+
+  1) start with one word from an array of words. math random to find the index number of that word
+  2) use a for loop to see if the guess is included in the word ie check one letter at a time (NOT USING INDEXOF)

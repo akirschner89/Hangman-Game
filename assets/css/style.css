@@ -54,9 +54,11 @@ h3 {
 	font-size: 2em;
 	font-family: 'Lato', sans-serif;
 	margin: 2%;
+	/*padding-top: 10px;
+    padding-bottom: 10px;*/
 }
 
-#wins, #correctLetters, #wrongCounter{
-	padding-top: 10px;
-    padding-bottom: 10px;
-}
+/*#wins, #correctLetters, #wrongCounter{
+	padding-top: 5px;
+    padding-bottom: 5px;
+}*/
