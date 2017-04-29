@@ -12,60 +12,74 @@
 	var wins = 0;
 	var wrongCounter = 15;
 	var badLetters = []; 
-
 	var randomBand = bands[Math.floor(Math.random() * bands.length)];
 	var bandUnderScore = randomBand.split("").map(function(){return "_"});
 	document.getElementById("correctLetters").innerHTML = bandUnderScore.join(" ");
 
 
+function reset() {
+	randomBand = bands[Math.floor(Math.random() * bands.length)];
+	bandUnderScore = randomBand.split("").map(function(){return "_"});
+	document.getElementById("correctLetters").innerHTML = bandUnderScore.join(" ");
+	// wins++;
+	console.log("adding to wins");
+	console.log(wins);
+	document.getElementById("winsCounter").innerHTML = wins;
+};
 
 
+// reset();
 
 
 
 
 document.onkeyup = function (event) {
+	console.log(bandUnderScore);
 
 
 
-			var guess = String.fromCharCode(event.keyCode).toUpperCase();
-			var index = randomBand.indexOf(guess);
-			console.log(index);
+	var guess = String.fromCharCode(event.keyCode).toUpperCase();
+	var index = randomBand.indexOf(guess);
+	// console.log(index);
 
-		
-            while(index >= 0) {
-            bandUnderScore[index] = guess;
-            document.getElementById("correctLetters").innerHTML = "<h3>" + bandUnderScore.join(" ") + "</h3>";
-            index = randomBand.indexOf(guess,index + 1);
-            // badLetters.push(guess);
-            };
-            
 
-  
-            if (index === -1) {
-            	wrongCounter--;
-            	document.getElementById("wrongCounter").innerHTML = "<h3>" + wrongCounter + "</h3>";
-            	// var badLetters = []; 
-            	badLetters.push(guess);
-				document.getElementById("wrongLetters").innerHTML ="<h3>" + badLetters + "</h3>";
-            };
+    while(index >= 0) {
+    bandUnderScore[index] = guess;
+    document.getElementById("correctLetters").innerHTML = "<h3>" + bandUnderScore.join(" ") + "</h3>";
+    index = randomBand.indexOf(guess,index + 1);
+    // badLetters.push(guess);
+    };
+    
+
+
+    if (index === -1) {
+    	wrongCounter--;
+    	document.getElementById("wrongCounter").innerHTML = "<h3>" + wrongCounter + "</h3>";
+    	// var badLetters = []; 
+    	badLetters.push(guess);
+		document.getElementById("wrongLetters").innerHTML ="<h3>" + badLetters + "</h3>";
+    };
 
 // if (index >= 0) {
 
 // }
             
-if (bandUnderScore.indexOf("_") == -1) {
-				wins ++;
-				document.getElementById("wins").innerHTML = "<h3>" + "Wins = " + wins + "</h3>";
-				alert("You win! Play again!");
-				location.reload();
+	if (bandUnderScore.indexOf("_") == -1) {
+					console.log("inside the bandUnderScore if block")
+					wins ++;
+					// document.getElementById("wins").innerHTML = "<h3>" + "Wins = " + wins + "</h3>";
+					alert("You win! Play again!");
+					// location.reload();
+					reset();
+
 				
 			};
 
-if (wrongCounter == 0) {
-	alert("You lose! Play again!");
-	location.reload();
-}};
+	if (wrongCounter == 0) {
+		alert("You lose! Play again!");
+		reset();
+	}
+};
 
 // if (location.reload()) {
 // 	wins ++;
